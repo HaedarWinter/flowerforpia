@@ -3,128 +3,348 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Flower For Pia</title>
+    <title>For Pia ❤️</title>
     <link rel="icon" href="Foto pada 02-09-24 pukul 16.57.jpg">
     <style>
+        /* Reset dan style umum */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
         body {
-            background-color: #222;
-            color: #000;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            line-height: 1.6;
+            background-color: #f4f4f4;
+            color: #333;
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            padding-top: 70px; /* Memberikan jarak dari atas */
+        }
+
+        /* Style navbar */
+
+        .navbar {
+            width: 100%;
+            background-image: url('www.png'); /* Mengubah background navbar menjadi gambar Furina */
+            background-size: cover;
+            background-position: center;
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            padding: 15px 20px; /* Meningkatkan padding pada navbar */
+            z-index: 1000;
             display: flex;
             justify-content: center;
             align-items: center;
-            min-height: 100vh;
-            font-family: Arial, sans-serif;
-            margin: 0;
-            padding: 0;
+            transition: top 0.3s;
         }
 
-        .container {
+
+        .navbar .nav-buttons {
+            display: flex;
+            flex-direction: row;
+            gap: 15px; /* Menambah jarak antar tombol */
+        }
+
+        .nav-button {
+            padding: 10px 20px;
+            background-color: #e74c3c;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+            font-size: 16px; /* Menambah ukuran font */
+        }
+
+        .nav-button:hover {
+            background-color: #c0392b;
+            transform: translateY(-2px);
+            box-shadow: 0 6px 12px rgba(0, 0, 0, 0.3);
+        }
+
+        /* Style halaman konten */
+        .page {
+            min-height: 100vh;
+            display: none;
+            justify-content: center;
+            align-items: flex-start; /* Menyelaraskan konten ke atas */
+            padding: 40px 20px; /* Menambah padding atas-bawah */
+            transition: opacity 0.5s ease;
+            width: 100%;
+        }
+
+        .page.active {
+            display: flex;
+            opacity: 1;
+        }
+
+        /* Style halaman bunga */
+        #flowers-page .container {
             display: flex;
             flex-wrap: wrap;
             gap: 30px;
             padding: 30px;
             border-radius: 10px;
             background-color: #fff;
-            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+            max-width: 1200px;
+            margin: 0 auto;
         }
 
         .card {
             width: 300px;
-            text-align: center;
-            flex: 1 1 calc(33.33% - 60px); /* Flexbox untuk menyesuaikan card */
+            text-align: left; /* Mengubah teks menjadi rata kiri */
+            flex: 1 1 calc(33.33% - 60px);
+            border-radius: 10px;
+            overflow: hidden;
+            transition: transform 0.3s;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+        }
+
+        .card:hover {
+            transform: translateY(-5px);
         }
 
         .card-image {
             width: 100%;
             height: auto;
-            border-radius: 10px;
-            box-shadow: 0 2px 5px rgba(255, 255, 255, 0);
-            margin-bottom: 20px;
-            transition: all 0.5s ease-in-out;
+            border-radius: 10px 10px 0 0;
+            transition: transform 0.3s;
         }
 
-        img:active{
-            box-shadow: 0 2px 5px rgba(255, 255, 255, 0.5);
-            transform: scale(1.6);
-            transition: all 0.5s ease-in-out;
+        .card-image:hover {
+            transform: scale(1.05);
         }
 
         .card-content {
             text-align: left;
+            padding: 20px; /* Menambah padding pada konten kartu */
         }
 
         .card-content h2 {
             margin-bottom: 10px;
+            font-size: 1.5em;
+            color: #e74c3c;
         }
 
         .card-content p {
-            line-height: 1.5;
             margin-bottom: 20px;
+            color: #666;
         }
 
-        .button {
-            display: inline-block;
-            padding: 10px 20px;
-            background-color: #4CAF50;
-            color: #fff;
-            text-decoration: none;
+        /* Style halaman permintaan maaf */
+        #apology-page .container {
+            max-width: 800px;
+            padding: 40px;
+            background: rgba(255, 255, 255, 0.95);
+            border-radius: 20px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .heart {
+            position: absolute;
+            top: -50px;
+            right: -50px;
+            width: 100px;
+            height: 100px;
+            background: rgba(255, 192, 203, 0.1);
+            transform: rotate(45deg);
+        }
+
+        #apology-page h1 {
+            color: #2c3e50;
+            font-size: 2.5em;
+            margin-bottom: 30px;
+            font-weight: 300;
+        }
+
+        .letter {
+            font-size: 1.1em;
+            color: #34495e;
+            margin-bottom: 30px;
+            text-align: justify;
+            padding: 20px;
+            border-left: 4px solid #e74c3c;
+            background: rgba(231, 76, 60, 0.05);
             border-radius: 5px;
-            transition: background-color 0.3s;
+            line-height: 1.6; /* Meningkatkan jarak baris */
         }
 
-        .button:hover {
-            background-color: #45a049;
+        .signature {
+            text-align: right;
+            font-style: italic;
+            color: #7f8c8d;
+            margin-top: 40px;
         }
 
-        /* Media query untuk layar iPhone 11 dan perangkat mobile */
-        @media (max-width: 828px) {
+        .promise-list {
+            margin: 30px 0;
+            padding-left: 20px;
+        }
+
+        .promise-list li {
+            margin: 15px 0;
+            color: #2c3e50;
+            position: relative;
+            padding-left: 25px;
+            list-style: none;
+        }
+
+        .promise-list li:before {
+            content: '⭐️';
+            position: absolute;
+            left: 0;
+            color: #e74c3c;
+        }
+
+        /* Media queries */
+        @media (max-width: 768px) {
             .container {
-                flex-direction: column;
                 padding: 20px;
+                margin: 10px;
+            }
+
+            #flowers-page .container {
+                flex-direction: column;
                 gap: 20px;
             }
 
             .card {
                 width: 100%;
-                flex: none; /* Menghilangkan efek flexbox pada layar kecil */
+                flex: none;
             }
 
-            .card-image {
-                width: 100%;
-                height: auto;
+            #apology-page h1 {
+                font-size: 1.8em;
+            }
+
+            .letter {
+                font-size: 1em;
+                padding: 15px;
+            }
+
+            .nav-buttons {
+                flex-direction: row;
+                gap: 10px;
+            }
+
+            .nav-button {
+                font-size: 14px;
             }
         }
     </style>
 </head>
 <body>
-    <div class="container">
-        <div class="card">
-            <img src="—Pngtree—set of pink roses_8998742.png" alt="Mawar" class="card-image">
-            <div class="card-content">
-                <h2>Mawar</h2>
-                <p>This flower one for youu piaa.</p>
-            </div>
+    <!-- Navbar -->
+    <div class="navbar">
+        <div class="nav-buttons">
+            <button class="nav-button" onclick="showPage('flowers-page')">Flowers</button>
+            <button class="nav-button" onclick="showPage('apology-page')">Message</button>
+            <button class="nav-button" onclick="sendWhatsAppMessage('https://api.whatsapp.com/send?phone=0813123456789')">Pencett ini diakhir, Piaa</button>
         </div>
+    </div>
 
-        <div class="card">
-            <img src="Happy Birthday Piaa !.png" alt="Bucket For Piaa" class="card-image">
-            <div class="card-content">
-                <h2>Bucket For Piaa</h2>
-                <p>Selamatttt ulang tahun bintang skibidinya Mahoraga hehe.</p>
+    <!-- Halaman Bunga -->
+    <div id="flowers-page" class="page active">
+        <div class="container">
+            <div class="card">
+                <img src="—Pngtree—set of pink roses_8998742.png" alt="Mawar " class="card-image">
+                <div class="card-content">
+                    <h2>Mawar</h2>
+                    <p>This flower one for you, Pia.</p>
+                </div>
             </div>
-        </div>
-
-        <div class="card">
-            <img src="—Pngtree—blue flowers_17279139.png" alt="Blue Flower" class="card-image">
-            <div class="card-content">
-                <h2>Blue Flower</h2>
-                <p>I don't know why I choose this flower, it's because u like blue isn't it?</p>
+            <div class="card">
+                <img src="Happy Birthday Piaa !.png" alt="Bucket For Piaa" class="card-image">
+                <div class="card-content">
+                    <h2>Bucket For Piaa</h2>
+                    <p>Selamat ulang tahun, bintang skibidinya Mahoraga!</p>
+                </div>
+            </div>
+            <div class="card">
+                <img src="—Pngtree—blue flowers_17279139.png" alt="Blue Flower" class="card-image">
+                <div class="card-content">
+                    <h2>Blue Flower</h2>
+                    <p>I chose this flower because you like blue, right?</p>
+                </div>
             </div>
         </div>
     </div>
 
+    <!-- Halaman Permintaan Maaf -->
+    <div id="apology-page" class="page">
+        <div class="container">
+            <div class="heart"></div>
+            <h1>Hi, Pia! How are you?</h1>
+            <div class="letter">
+                <p>Bintang Skibidi,</p>
+                <p>Semoga Pia selalu sehat dan semangat untuk menjalani semuanya. Sebelumnya, 
+                    kakak minta maaf karena mungkin menghubungi Pia lagi. Maafkan kakak yang tidak tahu diri ini. 
+                    Selamat level up, Pia! Semoga di bulan ulang tahun Pia ini, membuat Pia semakin semangat menjalani hari-harinya, semakin rajin, semakin dewasa, semakin pintar, dan selalu bahagia. 
+                    Maaf kakak di hari spesial kamu hanya bisa memberikan hadiah yang tidak seberapa. 
+                    Semoga Pia menerima pemberian dari MAHORAGA ini. Sehat selalu ya, bintang skibidinya kakak. 
+                    I hope you can have a good year ahead, dan btw, semoga ini jadi keputusan baik dari kakak untuk Pia.</p>
+                <div class="promise-list">
+                    <li>Tetep jadi orang baik yaa</li>
+                    <li>Jaga kesahtan piaa</li>
+                    <li>Semangat buat jalanin dunia</li>
+                    <li>Jangan lupa ibadah</li>
+                    <li>Kakak selalu mendukung Pia, bintang skibidinya Mahoraga!</li>
+                    <li>Pia akan selalu punya tempat di hati kakak.</li>
+                </div>
+                <p>Alhamdulillah Pia ternyata makin bahagia ya. Maafkan kakak yang selama ini sudah sering merepotkan Pia, apalagi sampai menyakiti. Terima kasih banyak juga Pia sudah terlalu banyak memaafkan kesalahan kakak. 
+                Kamu orang yang benar-benar tulus untuk selalu memaafkan setiap kesalahan yang kakak lakukan dan selalu sabar untuk itu. Terima kasih banyak ya. 
+                Kakak senang banget bisa bertemu Pia lagi, bahkan masih sempat-sempatnya mau bertemu kakak dan meluangkan waktu untuk itu. 
+                Terima kasih banyak dan maafkan kakak ya.</p>
+            </div>
+            <p class="signature">I miss u,<br>Makasii banyak piaa.</p>
+        </div>
+    </div>
+
     <script>
-        // JavaScript functionality can be added here if needed
+        let lastScrollTop = 0;
+
+        window.addEventListener('scroll', function() {
+            let navbar = document.querySelector('.navbar');
+            let currentScroll = window.pageYOffset || document.documentElement.scrollTop;
+
+            if (currentScroll > lastScrollTop) {
+                navbar.style.display = 'none'; // Sembunyikan navbar
+            } else {
+                navbar.style.display = 'flex'; // Tampilkan navbar
+            }
+            lastScrollTop = currentScroll <= 0 ? 0 : currentScroll;
+        });
+
+        function showPage(pageId) {
+            const pages = document.querySelectorAll('.page');
+            pages.forEach(page => {
+                page.classList.remove('active');
+            });
+
+            document.getElementById(pageId).classList.add('active');
+        }
+
+
+        function sendWhatsAppMessage() {
+            const phoneNumber = '6285171699066'; // Ganti dengan nomor telepon tujuan
+            const message = encodeURIComponent("Kirim pesan ini ke kakak kalo uda buka note dan web nya !");
+            const url = `https://wa.me/${phoneNumber}?text=${message}`;
+            
+            // Buka tautan WhatsApp di tab baru
+            window.open(url, '_blank');
+
+            
+        }
     </script>
 </body>
 </html>
